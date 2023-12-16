@@ -31,9 +31,11 @@ def callback():
 def handle_message(event):
     #echo
     # msg= event.message.text
-    msg = chatbot.get_response(event.message.text)
+    
+    msg = chatbot.get_response("https://www.youtube.com/watch?v=0exeq7-rZZc")
     message = TextSendMessage(text=msg)
     line_bot_api.reply_message(event.reply_token,message)
+    print(event.message.text)
 
 import os
 if __name__ == "__main__":
