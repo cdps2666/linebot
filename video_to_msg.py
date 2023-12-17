@@ -1,5 +1,35 @@
 from pytube import YouTube
 from youtube_transcript_api import YouTubeTranscriptApi
+from openai import OpenAI
+import os
+
+
+def youtube_video_to_txt(youtube_url, output_path='.'):
+    try:
+        os.environ["OPENAI_API_KEY"] = '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'
+
+        # 取得YouTube影片
+        yt = YouTube(youtube_url)
+
+        # 選擇最高品質的影片串流
+        # video_stream = yt.streams.get_highest_resolution()
+        video_stream = yt.streams.filter(only_audio=True).first()
+
+        # 下載影片
+        video_stream.download(output_path)
+
+        client = OpenAI()
+
+        audio_file= open(f"{yt.title}.mp4", "rb")
+        transcript = client.audio.transcriptions.create(
+          model="whisper-1",
+          file=audio_file,
+          response_format="text"
+        )
+        return {'status': True, 'msg': f"標題：{yt.title}\n內容：{transcript}"}
+    except Exception as e:
+        return {'status': False, 'msg': '無法取得轉錄稿'}
+
 
 def get_chinese_transcript(video_url):
     try:
@@ -45,8 +75,10 @@ def get_youtube_msg(url):
             print(youtube_msg)
             return {'status': True, 'msg': youtube_msg}
         else:
-            return {'status': False, 'msg': '無法取得轉錄稿'}
+            result = youtube_video_to_txt(url)
+            return result
 
     except Exception as e:
         print(f"Error: {e}")
-        return {'status': False, 'msg': e}
+        result = youtube_video_to_txt(url)
+        return result

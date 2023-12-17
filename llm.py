@@ -28,19 +28,19 @@ def get_travel_plan(video_context):
     # execution
     travel_plan = []
     input_string = ''
-    input_string = '''
-    [{"order": 1, "location": "渭水之丘"},
-    {"order": 2, "location": "張美阿嬤農場"},
-    {"order": 3, "location": "清水地熱公園"},
-    {"order": 4, "location": "北門綠豆沙牛乳大王"},
-    {"order": 5, "location": "猴洞坑瀑布"},
-    {"order": 6, "location": "龜山島日出海灘"},
-    {"order": 7, "location": "蘭陽博物館"},
-    {"order": 8, "location": "梅花湖"},
-    {"order": 9, "location": "金車噶瑪蘭威士忌酒廠"},
-    {"order": 10, "location": "蘭城晶英的紅樓中餐廳"}]
-    '''
-    # input_string = chain.run({'dict': dict_str,'context': video_context})
+    # input_string = '''
+    # [{"order": 1, "location": "渭水之丘"},
+    # {"order": 2, "location": "張美阿嬤農場"},
+    # {"order": 3, "location": "清水地熱公園"},
+    # {"order": 4, "location": "北門綠豆沙牛乳大王"},
+    # {"order": 5, "location": "猴洞坑瀑布"},
+    # {"order": 6, "location": "龜山島日出海灘"},
+    # {"order": 7, "location": "蘭陽博物館"},
+    # {"order": 8, "location": "梅花湖"},
+    # {"order": 9, "location": "金車噶瑪蘭威士忌酒廠"},
+    # {"order": 10, "location": "蘭城晶英的紅樓中餐廳"}]
+    # '''
+    input_string = chain.run({'dict': dict_str,'context': video_context})
     try:
         travel_plan = json.loads(input_string)
 
