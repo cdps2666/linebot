@@ -6,8 +6,6 @@ import os
 
 def youtube_video_to_txt(youtube_url, output_path='.'):
     try:
-        os.environ["OPENAI_API_KEY"] = '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'
-
         # 取得YouTube影片
         yt = YouTube(youtube_url)
 
@@ -18,7 +16,9 @@ def youtube_video_to_txt(youtube_url, output_path='.'):
         # 下載影片
         video_stream.download(output_path)
 
-        client = OpenAI()
+        client = OpenAI(
+            api_key="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",
+        )
 
         audio_file= open(f"{yt.title}.mp4", "rb")
         transcript = client.audio.transcriptions.create(
