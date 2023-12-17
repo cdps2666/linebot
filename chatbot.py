@@ -1,5 +1,8 @@
 import re
 import json
+import video_to_msg
+import gmap_url
+import llm
 
 
 def extract_urls(text):
@@ -12,15 +15,21 @@ def extract_urls(text):
     return urls
 
 def get_map_url(video_url):
+    
 
-    obj = {
-        "url": "https://tinyurl.com/yssopd74",
-        "location_list": [ 
-            {'order':1,'location':'地點名稱','url':'https://tinyurl.com/yl64yqu9'},
-            {'order':2,'location':'地點名稱','url':'https://tinyurl.com/yl64yqu9'}  
-        ],
-        "status":True
-    }
+    # 1.取得文字搞
+    result = video_to_msg.get_youtube_msg(video_url)
+
+    if(result['status']):
+        video_msg = result['msg']
+        #2.取得計畫地點list
+        plan_list = llm.get_travel_plan(video_msg)
+
+        #3.取得GoogleMap結果
+        obj = gmap_url.generate_google_maps_directions_link(plan_list)
+        
+    else :
+        obj = {"status":False}
 
     return obj
 
@@ -37,7 +46,7 @@ def get_response(input_message):
                 msgs.append(msg)
 
                 msg = "\n⭐ 並列出以下各景點的位置\n"
-                for item in result['location_list']:
+                for item in  result['location_list']:
                     order = item['order']
                     item_location = item['location']
                     item_url= item['url']
@@ -52,6 +61,6 @@ def get_response(input_message):
 
 if __name__ == "__main__":
 
-    msg = get_response("https://www.youtube.com/watch?v=0exeq7-rZZc")
+    msg = get_response("https://www.youtube.com/watch?v=T-lRw_vgyHQ&t=17s")
     print(msg)
         
