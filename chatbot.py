@@ -33,7 +33,7 @@ def get_response(input_message):
         if ( result ) :
             if( result['status'] == True) :
                 url = result['url']
-                msg = f"💡 根據您提供的影片，為您分析整理的旅遊行程網址:\n{url}"
+                msg = f"💡 根據您提供的影片，為您分析整理的旅遊行程:\n{url}"
                 msgs.append(msg)
 
                 msg = "\n⭐ 並列出以下各景點的位置\n"
