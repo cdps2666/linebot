@@ -5,4 +5,4 @@ openai
 pytube
 youtube_transcript_api
 googlemaps
-
+pyshorteners

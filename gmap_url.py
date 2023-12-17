@@ -1,7 +1,7 @@
 import googlemaps
 from datetime import datetime
 import urllib.parse
-#import pyshorteners
+import pyshorteners
 
 # 請填入你的 Google Maps API 金鑰
 api_key = 'AIzaSyBq22u-UfqFsez8TL_YzHStxBC5v6HhmOs'
@@ -9,10 +9,10 @@ gmaps = googlemaps.Client(key=api_key)
 
 def to_short_url(original_url):
     # 使用 TinyURL 服務
-    #s = pyshorteners.Shortener()
-    #short_url = s.tinyurl.short(original_url)
-    #return short_url
-    return original_url
+    s = pyshorteners.Shortener()
+    short_url = s.tinyurl.short(original_url)
+    return short_url
+    # return original_url
 
 def get_coordinates(location):
     geocode_result = gmaps.geocode(location)
