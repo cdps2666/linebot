@@ -17,7 +17,7 @@ def youtube_video_to_txt(youtube_url, output_path='.'):
         video_stream.download(output_path)
 
         client = OpenAI(
-            api_key="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",
+            api_key="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",
         )
 
         audio_file= open(f"{yt.title}.mp4", "rb")
