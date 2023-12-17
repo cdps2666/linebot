@@ -8,10 +8,10 @@ from langchain.chains import LLMChain
 
 def get_travel_plan(video_context):
     
-    # os.environ["OPENAI_API_KEY"] = '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'
+    # os.environ["OPENAI_API_KEY"]
     # text-davinci-003
     
-    llm = OpenAI(openai_api_key="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",max_tokens=1024,temperature=0.3)
+    llm = OpenAI(max_tokens=1024,temperature=0.3)
     dict =  {'order': 1, 'location': '地點名稱'}
 
     # prompt
